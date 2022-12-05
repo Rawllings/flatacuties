@@ -87,6 +87,14 @@ fetch("http://localhost:3000/characters")
 
   function buttonReset(e){
     e.preventDefault();
+
+    const id = document.querySelector(".inputs").id
+    let votesNum = document.querySelector("#vote-count").textContent = 0
+    let voteCount = document.querySelector("#votes").value = 0
+    votesNum = parseInt(votesNum,10)
+    voteCount = parseInt(voteCount,10)||0
+
+    voteCount = voteCount + votesNum
    document.getElementById("vote-count").textContent = 0;
 
     fetch(`http://localhost:3000/characters/${id}`,{
@@ -95,7 +103,7 @@ fetch("http://localhost:3000/characters")
           'Content-Type': 'application/json'
           
         },
-        body: JSON.stringify({votes})
+        body: JSON.stringify({votes:voteCount})
   })
   .then(res => res.json())
   .then(character => votes.textContent = character.votes )
